@@ -1,0 +1,38 @@
+{
+  "name": "api-blueprint-boilerplate",
+  "version": "1.0.2",
+  "description": "API Blueprint boilerplate with Drafter.js schema validation and Apiary CLI included",
+  "engines": {
+    "node": ">=6.2.0"
+  },
+  "devDependencies": {
+    "api-blueprint-validator-module": "~1.2.2",
+    "markdown-styles": "^3.1.9",
+    "rimraf": "^2.5.4",
+    "yargs": "^6.6.0"
+  },
+  "scripts": {
+    "setup": "mkdir build",
+    "clean": "rimraf build",
+    "build": "npm run clean && npm run setup && npm run build:blueprint && npm run build:raw",
+    "build:blueprint": "apiary preview --path=\"src/api.apib\" --output=\"build/api.html\"",
+    "build:raw": "cp src/api.apib ./api.md && generate-md --layout github --input ./api.md --output build/raw && rm ./api.md",
+    "test": "node validate.js --files 'src/**/*.apib'",
+    "start": "apiary preview --path=\"src/api.apib\" --server --port 8080",
+    "publish": "apiary publish --api-name=\"${APIARY_API_NAME}\" --path=\"src/api.apib\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jsynowiec/api-blueprint-boilerplate"
+  },
+  "author": {
+    "name": "Jakub Synowiec",
+    "email": "jakub@jakubsynowiec.info",
+    "url": "https://jakubsynowiec.info"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jsynowiec/api-blueprint-boilerplate/issues"
+  },
+  "homepage": "https://github.com/jsynowiec/api-blueprint-boilerplate#readme"
+}
